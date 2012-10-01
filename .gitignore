@@ -4,7 +4,7 @@ using namespace std;
 
 
 class Stack {
-  int data_[SIZE];
+	int data_[SIZE];
 	int top_;
 	
 
@@ -13,19 +13,20 @@ public:
 		top_=0;
 	}
 	
-	void push(int val){
+	int push(int val){
 		if(full()){
 			cout << "OOOOPS!! STACK is full..." << endl;
-			return;
+			return -1;
 		}
 		data_[top_++]=val;
 	}
-	int pop(void){
+	int pop(int& val){
 		if(empty()){
 			cout << "OOOOPS!! STACK is empty..." << endl;
-			return 0;
+			return -1;
 		}
-		return data_[--top_];
+		val=data_[--top_];
+		return 0 ;
 	}
 	
 	bool empty(){
@@ -42,9 +43,20 @@ int main(){
 	for(int i =0;i<SIZE ;i++ ){
 		st.push(i*10);
 	}
-	while(!st.empty()){
-		cout << st.pop() << endl;
+	if(st.push(9999==-1))
+	{
+		cout << "stack error handling in push .... " << endl;
 	}
+	while(!st.empty()){
+		int val;		
+		 st.pop(val);
+		 cout << val << endl;
+	}
+	int val;	
+	if(st.pop(val) == -1){
+		cout << "stack error handling in pop .... " << endl;
+	}
+	
 
 	return 0;
 }
